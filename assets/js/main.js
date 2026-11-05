@@ -51,7 +51,7 @@ document.documentElement.classList.add('js');
 
   /* reveal headings & images on scroll */
   if(motionOK&&'IntersectionObserver' in window){
-    $$('.dir, .iris-stage, .show-grid .ph, .review-ph, .calc-media, .g-item').forEach(el=>el.classList.add('img-rv'));
+    $$('.dir, .iris-stage, .show-grid .ph, .review-grid, .calc-media, .g-item').forEach(el=>el.classList.add('img-rv'));
     const io2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('go');e.target.classList.remove('pre');io2.unobserve(e.target)}}),{rootMargin:'0px 0px -10% 0px'});
     $$('main h2.split, .img-rv').forEach(el=>{
       if(el.getBoundingClientRect().top>innerHeight){if(el.classList.contains('img-rv'))el.classList.add('pre');io2.observe(el)}
@@ -74,7 +74,7 @@ document.documentElement.classList.add('js');
     addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.classList.add('on')},{passive:true});
     document.addEventListener('mouseleave',()=>cur.classList.remove('on'));
     (function loop(){cx+=(mx-cx)*.18;cy+=(my-cy)*.18;cur.style.transform='translate('+cx+'px,'+cy+'px)';requestAnimationFrame(loop)})();
-    $$('.g-item, .iris-stage, .dir').forEach(el=>{el.addEventListener('mouseenter',()=>cur.classList.add('big'));el.addEventListener('mouseleave',()=>cur.classList.remove('big'))});
+    $$('.g-item, .iris-stage, .dir, .rv-tile').forEach(el=>{el.addEventListener('mouseenter',()=>cur.classList.add('big'));el.addEventListener('mouseleave',()=>cur.classList.remove('big'))});
     $$('.btn').forEach(b=>{
       b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect();b.style.transform='translate('+((e.clientX-r.left-r.width/2)*.22)+'px,'+((e.clientY-r.top-r.height/2)*.3)+'px)'});
       b.addEventListener('mouseleave',()=>b.style.transform='');
@@ -129,6 +129,7 @@ document.documentElement.classList.add('js');
     it.addEventListener('click',go);it.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}});
   });
   $('#irisZoom').addEventListener('click',()=>{const t=$$('.thumbs button');open(t.map(b=>({src:b.dataset.src,alt:b.dataset.alt,cap:b.dataset.alt})),t.findIndex(b=>b.getAttribute('aria-pressed')==='true'))});
+  const tiles=$$('.rv-tile');tiles.forEach((t,i)=>t.addEventListener('click',()=>open(tiles.map(x=>({src:x.querySelector('img').src,alt:x.querySelector('img').alt,cap:x.dataset.cap})),i)));
   $('#lbClose').onclick=close;
   $('#lbPrev').onclick=()=>{idx=(idx-1+list.length)%list.length;show()};
   $('#lbNext').onclick=()=>{idx=(idx+1)%list.length;show()};
