@@ -14,4 +14,4 @@ assets/
 
 Открыть локально: двойной клик по `index.html`.
 
-Сайт разработан в студии [Сайтика](https://студия-сайтика.рф/).
+Сайт разработан в студии [Сайтика](https://студия-сайтика.рф/?utm_source=client_sites&utm_medium=referral&utm_campaign=footer).
